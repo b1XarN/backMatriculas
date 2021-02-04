@@ -18,7 +18,7 @@ class PersonalController extends Controller
     {
        $personal = DB::table('personal as p')->join('departamento as d', 'p.dep_cod', '=', 'd.dep_cod')->where('p.per_estado', '=', '1')
        ->select('p.per_cod', 'p.per_dni', 'p.per_apellidos', 'p.per_nombres', 'd.dep_descripcion as departamento', 'p.per_direccion', 
-                'p.estadocivil', 'p.per_telefono', 'p.per_segurosocial', 'p.per_ingreso'); 
+                'p.per_estadocivil', 'p.per_telefono', 'p.per_segurosocial', 'p.per_ingreso')->get(); 
        return response()->json($personal);
     }
 
@@ -45,13 +45,13 @@ class PersonalController extends Controller
             $personal->per_dni=$request->per_dni;
             $personal->per_apellidos=$request->per_apellidos;
             $personal->per_nombres=$request->per_nombres;
-            $personal->dep_descripcion=$request->dep_descripcion;
+            $personal->dep_cod=$request->dep_cod;
             $personal->per_direccion=$request->per_direccion;
             $personal->per_estadocivil=$request->per_estadocivil;
             $personal->per_telefono=$request->per_telefono;
             $personal->per_segurosocial=$request->per_segurosocial;
             $personal->per_ingreso=$request->per_ingreso;
-            $personal->estado='1';
+            $personal->per_estado='1';
             $personal->save();
             $result = ['per_dni' => $personal->per_dni,
                     'created' => true];
