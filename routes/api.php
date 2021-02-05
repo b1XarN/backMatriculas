@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('personals', 'PersonalController');
 Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
+Route::get('niveles', 'NivelController@ListarNiveles');
