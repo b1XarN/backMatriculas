@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Grado;
+use App\Curso;
 
 class CursoController extends Controller
 {
@@ -43,7 +43,7 @@ class CursoController extends Controller
             $curso->cur_descripcion = $request->cur_descripcion;
             $curso->cur_abreviatura = $request->cur_abreviatura;
             $curso->niv_cod = $request->niv_cod;
-            $personal->save();
+            $curso->save();
             $result = ['cur_descripcion' => $curso->cur_descripcion,
                         'created' => true];
             return $result;
