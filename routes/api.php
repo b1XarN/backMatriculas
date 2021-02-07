@@ -22,4 +22,8 @@ Route::resource('personals', 'PersonalController');
 Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
 Route::get('niveles', 'NivelController@ListarNiveles');
 Route::get('grados', 'GradoController@ListarGrado');
+Route::get('secciones', 'SeccionController@ListarSeccion');
+Route::get('ubigeos', 'UbigeoController@ListarUbigeo');
 Route::resource('cursos', 'CursoController');
+Route::resource('alumnos', 'AlumnoController');
+Route::resource('parientes', 'ParienteController');

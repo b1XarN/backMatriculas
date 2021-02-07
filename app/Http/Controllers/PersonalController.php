@@ -17,7 +17,7 @@ class PersonalController extends Controller
     public function index()
     {
        $personal = DB::table('personal as p')->join('departamento as d', 'p.dep_cod', '=', 'd.dep_cod')->where('p.per_estado', '=', '1')
-       ->select('p.per_cod', 'p.per_dni', 'p.per_apellidos', 'p.per_nombres', 'd.dep_descripcion as departamento', 'p.per_direccion', 
+       ->select('p.per_dni', 'p.per_apellidos', 'p.per_nombres', 'p.dep_cod', 'p.per_direccion', 
                 'p.per_estadocivil', 'p.per_telefono', 'p.per_segurosocial', 'p.per_ingreso')->get(); 
        return response()->json($personal);
     }
