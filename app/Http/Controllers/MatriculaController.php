@@ -11,9 +11,10 @@ class MatriculaController extends Controller
     
     public function index()
     {
-        $matricula = DB::table('matricula as m')->join('nivel as n', 'n.niv_cod', '=', 'm.niv_cod')
+        $matricula = DB::table('matricula as m')->join('alumno as a', 'a.alu_dni', '=', 'm.alu_dni')->join('nivel as n', 'n.niv_cod', '=', 'm.niv_cod')
         ->join('grado as g', 'g.gra_cod', '=', 'm.gra_cod')->join('seccion as s', 's.sec_cod', '=', 'm.sec_cod')
         ->select('m.mat_num', 'm.alu_dni','m.mat_anio', 'm.mat_fechar', 'n.niv_descripcion', 'g.gra_descripcion', 's.sec_letra')->get();
+        return response()->json($matricula);
     }
 
        

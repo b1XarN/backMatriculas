@@ -18,7 +18,7 @@ class AlumnoController extends Controller
         $alumno = DB::table('alumno as a')->join('ubigeo_peru_departments as ud', 'a.department_id', '=', 'ud.id')
         ->join('ubigeo_peru_provinces as up', 'a.province_id', '=', 'up.id')->join('ubigeo_peru_districts as ut', 'a.district_id', '=', 'ut.id')
         ->select('a.alu_dni', 'a.alu_codigomod', 'a.alu_apellidop', 'a.alu_apellidom', 'a.alu_nombres', 'a.alu_sexo', 
-            'a.alu_fechanac', 'a.alu_escala', 'a.alu_pais', 'ud.name', 'up.name', 'ut.name', 'a.alu_anioingreso', 'a.alu_lenguamat', 'a.alu_estadocivil', 
+            'a.alu_fechanac', 'a.alu_escala', 'a.alu_pais', 'ud.name as Departamento', 'up.name as Provincia', 'ut.name as Distrito', 'a.alu_anioingreso', 'a.alu_lenguamat', 'a.alu_estadocivil', 
             'a.alu_religion', 'a.alu_fechabautizo', 'a.alu_parroquiab', 'a.alu_colprocedencia')->get();
         return response()->json($alumno);
     }
