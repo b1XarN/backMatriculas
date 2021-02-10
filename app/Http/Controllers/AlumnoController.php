@@ -15,9 +15,10 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumno = DB::table('alumno as a')->join('ubigeo as u', 'a.ubi_id', '=', 'u.ubi_id')
+        $alumno = DB::table('alumno as a')->join('ubigeo_peru_departments as ud', 'a.department_id', '=', 'ud.id')
+        ->join('ubigeo_peru_provinces as up', 'a.province_id', '=', 'up.id')->join('ubigeo_peru_districts as ut', 'a.district_id', '=', 'ut.id')
         ->select('a.alu_dni', 'a.alu_codigomod', 'a.alu_apellidop', 'a.alu_apellidom', 'a.alu_nombres', 'a.alu_sexo', 
-            'a.alu_fechanac', 'a.alu_escala', 'a.alu_pais', 'a.ubi_id', 'a.alu_anioingreso', 'a.alu_lenguamat', 'a.alu_estadocivil', 
+            'a.alu_fechanac', 'a.alu_escala', 'a.alu_pais', 'ud.name', 'up.name', 'ut.name', 'a.alu_anioingreso', 'a.alu_lenguamat', 'a.alu_estadocivil', 
             'a.alu_religion', 'a.alu_fechabautizo', 'a.alu_parroquiab', 'a.alu_colprocedencia')->get();
         return response()->json($alumno);
     }
@@ -35,7 +36,9 @@ class AlumnoController extends Controller
             $alumno->alu_fechanac = $request->alu_fechanac;
             $alumno->alu_escala = $request->alu_escala;
             $alumno->alu_pais = $request->alu_pais;
-            $alumno->ubi_id = $request->ubi_id;
+            $alumno->department_id = $request->department_id;
+            $alumno->province_id = $request->province_id;
+            $alumno->district_id = $request->district_id;
             $alumno->alu_anioingreso = $request->alu_anioingreso;
             $alumno->alu_lenguamat = $request->alu_lenguamat;
             $alumno->alu_estadocivil = $request->alu_estadocivil;

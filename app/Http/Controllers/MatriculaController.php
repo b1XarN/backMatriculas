@@ -11,8 +11,9 @@ class MatriculaController extends Controller
     
     public function index()
     {
-        $matricula = DB::table('matricula as m')->join('seccion as s', 's.sec_cod', '=', 'm.sec_cod')
-        ->select('m.mat_num', 'm.alu_dni','m.mat_anio', 'm.mat_fechar', 'm.sec_cod', 'm.gra_cod', 'm.niv_cod')->get();
+        $matricula = DB::table('matricula as m')->join('nivel as n', 'n.niv_cod', '=', 'm.niv_cod')
+        ->join('grado as g', 'g.gra_cod', '=', 'm.gra_cod')->join('seccion as s', 's.sec_cod', '=', 'm.sec_cod')
+        ->select('m.mat_num', 'm.alu_dni','m.mat_anio', 'm.mat_fechar', 'n.niv_descripcion', 'g.gra_descripcion', 's.sec_letra')->get();
     }
 
        
@@ -22,71 +23,35 @@ class MatriculaController extends Controller
             $matricula = new Matricula();
             $matricula->mat_num = $request->mat_num;
             $matricula->alu_dni = $request->alu_dni;
-            $matricula->mat_anio = $request->alu_apellidop;
-            $matricula->alu_apellidom = $request->alu_apellidom;
-            $matricula->alu_nombres = $request->alu_nombres;
-            $matricula->alu_sexo = $request->alu_sexo;
-            $alumno->alu_fechanac = $request->alu_fechanac;
-            $alumno->alu_escala = $request->alu_escala;
-            $alumno->alu_pais = $request->alu_pais;
-            $alumno->ubi_id = $request->ubi_id;
-            $alumno->alu_anioingreso = $request->alu_anioingreso;
-            $alumno->alu_lenguamat = $request->alu_lenguamat;
-            $alumno->alu_estadocivil = $request->alu_estadocivil;
-            $alumno->alu_religion = $request->alu_religion;
-            $alumno->alu_fechabautizo = $request->alu_fechabautizo;
-            $alumno->alu_parroquiab = $request->alu_parroquiab;
-            $alumno->alu_colprocedencia = $request->alu_colprocedencia;
-            $alumno->save();
-            $result = ['alu_dni' => $alumno->alu_dni,
+            $matricula->mat_anio = $request->mat_anio;
+            $matricula->mat_fechar = $request->mat_fechar;
+            $matricula->niv_cod = $request->niv_cod;
+            $matricula->gra_cod = $request->gra_cod;
+            $matricula->sec_cod = $request->sec_cod;
+            $matricula->save();
+            $result = ['mat_num' => $matricula->mat_num,
                     'created' => true];
         }catch(Exception $e){
             return "Error - " . $e->getMessage();
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return Matricula::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $matricula = Matricula::findOrFail($id);
+        $matricula->Update($request->all());
+        return $matricula;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $matricula = Matricula::findOrFail($id);
+        $matricula->delete();
+        return 204;
     }
 }

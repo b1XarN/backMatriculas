@@ -28,4 +28,5 @@ Route::get('ubi_provs/{id}', 'UbigeoController@ListarUbiprov');
 Route::get('ubi_dists/{id}', 'UbigeoController@ListarUbidist');
 Route::resource('cursos', 'CursoController');
 Route::resource('alumnos', 'AlumnoController');
+Route::resource('matriculas', 'MatriculaController');
 Route::resource('parientes', 'ParienteController');
