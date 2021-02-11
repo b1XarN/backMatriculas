@@ -21,8 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('personals', 'PersonalController');
 Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
 Route::get('niveles', 'NivelController@ListarNiveles');
-Route::get('grados', 'GradoController@ListarGrado');
-Route::get('secciones', 'SeccionController@ListarSeccion');
+Route::get('grados/{niv_cod}', 'GradoController@ListarGrado');
+Route::get('secciones/{gra_cod}', 'SeccionController@ListarSeccion');
 Route::get('ubi_deps', 'UbigeoController@ListarUbidep');
 Route::get('ubi_provs/{id}', 'UbigeoController@ListarUbiprov');
 Route::get('ubi_dists/{id}', 'UbigeoController@ListarUbidist');

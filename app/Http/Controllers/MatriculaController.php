@@ -13,7 +13,7 @@ class MatriculaController extends Controller
     {
         $matricula = DB::table('matricula as m')->join('alumno as a', 'a.alu_dni', '=', 'm.alu_dni')->join('nivel as n', 'n.niv_cod', '=', 'm.niv_cod')
         ->join('grado as g', 'g.gra_cod', '=', 'm.gra_cod')->join('seccion as s', 's.sec_cod', '=', 'm.sec_cod')
-        ->select('m.mat_num', 'm.alu_dni','m.mat_anio', 'm.mat_fechar', 'n.niv_descripcion', 'g.gra_descripcion', 's.sec_letra')->get();
+        ->select('m.mat_num', 'm.alu_dni', 'a.alu_apellidop', 'a.alu_apellidom', 'a.alu_nombres','m.mat_anio', 'm.mat_fechar', 'm.niv_cod', 'n.niv_descripcion', 'm.gra_cod', 'g.gra_descripcion', 'm.sec_cod','s.sec_letra')->get();
         return response()->json($matricula);
     }
 
