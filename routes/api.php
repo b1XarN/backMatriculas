@@ -17,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+<<<<<<< HEAD
+=======
+
+Route::resource('personals', 'PersonalController');
+Route::get('departamentos', 'DepartamentoController@ListarDepartamento');
+Route::get('niveles', 'NivelController@ListarNiveles');
+Route::get('grados', 'GradoController@ListarGrado');
+Route::get('secciones', 'SeccionController@ListarSeccion');
+Route::get('ubi_deps', 'UbigeoController@ListarUbidep');
+Route::get('ubi_provs/{id}', 'UbigeoController@ListarUbiprov');
+Route::get('ubi_dists/{id}', 'UbigeoController@ListarUbidist');
+Route::resource('cursos', 'CursoController');
+Route::resource('alumnos', 'AlumnoController');
+Route::resource('matriculas', 'MatriculaController');
+Route::resource('parientes', 'ParienteController');
+>>>>>>> fb4ea8f0df6707fdfa0a151232cf4e7c8d32dd29
