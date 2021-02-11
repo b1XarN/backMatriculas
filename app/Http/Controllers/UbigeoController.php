@@ -11,7 +11,7 @@ use App\Ubi_prov;
 class UbigeoController extends Controller
 {
     public function ListarUbidep(){
-        $ubi_dep = Ubi_dep::get();
+        $ubi_dep = DB::table('ubigeo_peru_departments')->get();
         return response()->json($ubi_dep);
     }
 
